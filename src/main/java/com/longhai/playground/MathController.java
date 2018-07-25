@@ -1,10 +1,9 @@
 package com.longhai.playground;
 
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/math")
@@ -28,5 +27,10 @@ public class MathController {
     @GetMapping(path = "/sum")
     public String getSum(@RequestParam MultiValueMap<String, String> values) {
         return MathService.sum(values.get("n"));
+    }
+
+    @RequestMapping(path = "/volume/{length}/{width}/{height}")
+    public String getVolume(@PathVariable Map<String, String> values) {
+        return "The volume of a " + values.get("length") + "x"+ values.get("width") + "x"+ values.get("height") + " rectangle is " + Integer.parseInt(values.get("length")) * Integer.parseInt(values.get("width")) * Integer.parseInt(values.get("height"));
     }
 }
