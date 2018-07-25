@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -69,5 +70,24 @@ public class MathControllerTest {
     }
 
 
+    @Test
+    public void testArea() throws Exception {
+        mvc.perform(post("/math/area?type=circle&radius=4")
+                .accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a circle with a radius of 4 is 50.26548"));
+
+        mvc.perform(post("/math/area?type=rectangle&width=4&height=7")
+                .accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a 4x7 rectangle is 28"));
+
+        mvc.perform(post("/math/area?type=rectangle&radius=4")
+                .accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Invalid"));
+
+
+    }
 
 }
