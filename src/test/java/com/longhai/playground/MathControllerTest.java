@@ -25,4 +25,34 @@ public class MathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("3.141592653589793"));
     }
+
+    @Test
+    public void testCalculate() throws Exception {
+        mvc.perform(get("/math/calculate?operation=add&x=4&y=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 6 = 10"));
+
+        mvc.perform(get("/math/calculate?operation=multiply&x=4&y=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 * 6 = 24"));
+
+        mvc.perform(get("/math/calculate?operation=subtract&x=4&y=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 - 6 = -2"));
+
+        mvc.perform(get("/math/calculate?operation=divide&x=30&y=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("30 / 6 = 5"));
+
+        mvc.perform(get("/math/calculate?x=4&y=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 6 = 10"));
+    }
+
+    @Test
+    public void testSum() throws Exception {
+        mvc.perform(get("/math/sum?n=4&n=5&n=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 5 + 6 = 15"));
+    }
 }
