@@ -2,9 +2,7 @@ package com.longhai.playground;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -51,6 +49,35 @@ public class EndPointController {
         flight2.setTickets(asList(new Ticket(passenger2, 500)));
 
         return asList(flight1, flight2);
+    }
+
+    @PostMapping("/flights/tickets/total")
+    public Result getFlights(@RequestBody Flight flight) {
+
+        int sum = flight.getTickets().stream()
+                .map(ticket -> ticket.getPrice())
+                .mapToInt(x -> x)
+                .sum();
+
+        return new Result(sum);
+    }
+
+    public static class Result {
+        private int result;
+        public Result() {
+        }
+
+        public Result(int result) {
+            this.result = result;
+        }
+
+        public int getResult() {
+            return result;
+        }
+
+        public void setResult(int result) {
+            this.result = result;
+        }
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -116,6 +143,9 @@ public class EndPointController {
     public static class Ticket{
         private Person passenger;
         private int price;
+
+        public Ticket() {
+        }
 
         public Ticket(Person passenger, int price) {
             this.passenger = passenger;
