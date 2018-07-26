@@ -46,8 +46,8 @@ public class EndPointControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.lastName", is("Johnson")))
-                .andExpect(jsonPath("$.firstName", is("Dwayne")));
+                .andExpect(jsonPath("$.first_name", is("Dwayne")))
+                .andExpect(jsonPath("$.last_name", is("Johnson")));
     }
 
     @Test
@@ -56,8 +56,8 @@ public class EndPointControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].tickets[0].passenger.lastName", is("Some other name")))
-                .andExpect(jsonPath("$[0].tickets[0].passenger.firstName", is("Some name")));
+                .andExpect(jsonPath("$[0].tickets[0].passenger.last_name", is("Some other name")))
+                .andExpect(jsonPath("$[0].tickets[0].passenger.first_name", is("Some name")));
     }
 
     @Test
