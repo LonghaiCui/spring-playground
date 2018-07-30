@@ -5,6 +5,7 @@ import com.longhai.playground.model.LessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,9 +36,20 @@ public class LessonsController {
         return this.repository.save(lesson);
     }
 
+    @PostMapping("/list")
+    public void create(@RequestBody List<Lesson> lessons) {
+         this.repository.saveAll(lessons);
+    }
+
     @PatchMapping("/{id}")
     public Lesson update(@RequestBody Lesson lesson) {
         return this.repository.save(lesson);
+    }
+
+    @GetMapping("/find/{title}")
+    public Lesson findLesson(@PathVariable String title) {
+        Lesson lesson = this.repository.findByTitle(title);
+       return lesson;
     }
 
 }

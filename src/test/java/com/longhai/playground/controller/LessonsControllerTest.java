@@ -20,7 +20,6 @@ import java.nio.file.Paths;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,33 +46,54 @@ public class LessonsControllerTest {
         objectMapper = new ObjectMapper();
     }
 
+//    @Transactional
+//    @Rollback
+//    @Test
+//    public void testPostLesson() throws Exception {
+//        String request = getJSON("/lesson1.json");
+//        String requestUpdate = getJSON("/lessonUpdate.json");
+//
+//        mockMvc.perform(post("/lessons")
+//                .accept(MediaType.APPLICATION_JSON_UTF8)
+//                .content(request)
+//                .contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(status().isOk());
+//
+//        mockMvc.perform(get("/lessons/1")
+//                .accept(MediaType.APPLICATION_JSON_UTF8)
+//                .contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.title", is("Requests and Responses")));
+//
+//        mockMvc.perform(patch("/lessons/1")
+//                .accept(MediaType.APPLICATION_JSON_UTF8)
+//                .content(requestUpdate)
+//                .contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(status().isOk());
+//
+//        mockMvc.perform(get("/lessons/1")
+//                .accept(MediaType.APPLICATION_JSON_UTF8)
+//                .contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.title", is("Spring Security")));
+//
+//        repository.deleteAll();
+//
+//    }
+
     @Transactional
     @Rollback
     @Test
-    public void testPostLesson() throws Exception {
-        String request = getJSON("/lesson1.json");
-        String requestUpdate = getJSON("/lessonUpdate.json");
+    public void testCustomMethods() throws Exception {
+        String request = getJSON("/lessons.json");
 
-
-        mockMvc.perform(post("/lessons")
+        mockMvc.perform(post("/lessons/list")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .content(request)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/lessons/1")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title", is("Requests and Responses")));
-
-        mockMvc.perform(patch("/lessons/1")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .content(requestUpdate)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
-
-        mockMvc.perform(get("/lessons/1")
+        mockMvc.perform(get("/lessons/find/Spring Security")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
@@ -82,6 +102,7 @@ public class LessonsControllerTest {
         repository.deleteAll();
 
     }
+
 
     private String getJSON(String path) throws Exception {
         URL url = this.getClass().getResource(path);
