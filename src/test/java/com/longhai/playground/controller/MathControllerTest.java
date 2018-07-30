@@ -1,6 +1,5 @@
-package com.longhai.playground;
+package com.longhai.playground.controller;
 
-import com.longhai.playground.controller.MathController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +85,4 @@ public class MathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Invalid"));
     }
-
-
 }

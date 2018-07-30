@@ -1,7 +1,6 @@
-package com.longhai.playground;
+package com.longhai.playground.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.longhai.playground.controller.EndPointController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

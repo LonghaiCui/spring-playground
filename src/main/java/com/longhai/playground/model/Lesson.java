@@ -1,6 +1,7 @@
 package com.longhai.playground.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class Lesson {
 
     @Column(columnDefinition = "date")
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonProperty("delivered_on")
     private Date deliveredOn;
 
     public Long getId() {
