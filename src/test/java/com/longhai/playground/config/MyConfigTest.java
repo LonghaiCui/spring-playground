@@ -24,6 +24,7 @@ public class MyConfigTest {
     @Autowired
     private WordConfig config;
 
+    //Test Config
     @Test
     public void testPropertiesAreMappedCorrectly() {
         assertThat(config.isCaseSensitive(), equalTo(false));
