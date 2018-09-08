@@ -8,6 +8,7 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "wordcount")
 public class WordConfig {
+    //Spring Config
     private boolean caseSensitive;
     private List<String> skip;
 
