@@ -50,7 +50,7 @@ public class WordCounterTest {
         when(wordConfig.getSkip())
                 .thenReturn(asList(""));
 
-        Map<String, Integer> count = wordCounter.count("ccc");
+        Map<String, Integer> count = wordCounter.count("How now, brown cow");
 
         assertEquals(count.get("How"), new Integer(1));
         assertEquals(count.get("now"), new Integer(1));
