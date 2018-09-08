@@ -12,11 +12,14 @@ import java.util.Map;
 
 @RestController
 public class WordController {
-    @Autowired
-    WordCounter wordCounter;
+    private WordCounter wordCounter;
 
     @Autowired
-    MyConfig myConfig;
+    private MyConfig myConfig;
+
+    public WordController(WordCounter wordCounter) {
+        this.wordCounter = wordCounter;
+    }
 
     @RequestMapping("/words/count")
     public Map<String, Integer> countWords(@RequestBody String message){

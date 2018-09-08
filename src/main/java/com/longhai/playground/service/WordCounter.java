@@ -3,13 +3,13 @@ package com.longhai.playground.service;
 
 import com.longhai.playground.config.WordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Configuration
 public class WordCounter {
 
     private WordConfig wordConfig;
@@ -18,6 +18,7 @@ public class WordCounter {
     public WordCounter(WordConfig wordConfig) {
         this.wordConfig = wordConfig;
     }
+
 
     public Map<String, Integer> count(String message) {
 
