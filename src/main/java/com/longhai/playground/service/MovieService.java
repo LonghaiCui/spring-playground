@@ -11,6 +11,10 @@ import java.util.List;
 public class MovieService {
     private final RestTemplate restTemplate = new RestTemplate();
 
+    public RestTemplate getRestTemplate() {
+        return restTemplate;
+    }
+
     public String getMessage() {
         return this.restTemplate.getForObject(
                 "https://api.github.com/zen",
