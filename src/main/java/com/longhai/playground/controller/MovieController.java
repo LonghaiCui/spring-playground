@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @RestController
+//Movie Controller
 public class MovieController {
 
     private MovieService movieService;
