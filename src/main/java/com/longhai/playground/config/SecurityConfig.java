@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(employeeDetailsService)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .passwordEncoder(passwordEncoder())
         ;
     }
 
@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             employee.setName("Employee");
             employee.setSalary(24);
             employee.setUsername("employee");
-            employee.setPassword("my-employee-password");
+            employee.setPassword(passwordEncoder().encode("my-employee-password"));
             employee.setRole("EMPLOYEE");
             employeeRepository.save(employee);
 
@@ -55,11 +55,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             boss.setName("Bossy Boss");
             boss.setSalary(24);
             boss.setUsername("boss");
-            boss.setPassword("my-boss-password");
+            boss.setPassword(passwordEncoder().encode("my-boss-password"));
             boss.setRole("MANAGER");
             employeeRepository.save(boss);
         };
+    }
 
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
 
