@@ -24,10 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@RunWith(SpringRunner.class)
-//@WebMvcTest(LessonsController.class)
-//@AutoConfigureMockMvc
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -102,7 +98,6 @@ public class LessonsControllerTest {
         repository.deleteAll();
 
     }
-
 
     private String getJSON(String path) throws Exception {
         URL url = this.getClass().getResource(path);
