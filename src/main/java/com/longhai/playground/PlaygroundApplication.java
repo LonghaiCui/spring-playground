@@ -15,16 +15,5 @@ public class PlaygroundApplication {
 		SpringApplication.run(PlaygroundApplication.class, args);
 	}
 
-	@Bean
-	@Profile("default")
-	public CommandLineRunner seedData(EmployeeRepository employeeRepository) {
-		return (args) -> {
-			employeeRepository.deleteAll();
-			Employee employee = new Employee();
-			employee.setName("Employee");
-			employee.setSalary(24);
-			employeeRepository.save(employee);
-		};
 
-	}
 }

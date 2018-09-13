@@ -3,6 +3,7 @@ package com.longhai.playground.controller;
 import com.longhai.playground.config.SecurityConfig;
 import com.longhai.playground.model.Employee;
 import com.longhai.playground.model.EmployeeRepository;
+import com.longhai.playground.service.EmployeeDetailsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,11 +34,14 @@ public class EmployeesControllerTest {
     @MockBean
     EmployeeRepository employeeRepository;
 
+    @MockBean
+    EmployeeDetailsService employeeDetailsService;
+
     @Before
     public void setUp() throws Exception {
         when(employeeRepository.findAll())
                 .thenReturn(Arrays.asList(
-                        new Employee(1L, "Employee", 24, null)
+                        new Employee(1L, "Employee", 24, null, "employee", "my-employee-password", "EMPLOYEE")
                 ));
 
     }
@@ -49,7 +53,9 @@ public class EmployeesControllerTest {
                 .with(user("user").roles("MANAGER"))
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())
-                .andExpect(content().string("[{\"id\":1,\"name\":\"Employee\",\"salary\":24,\"managerId\":null}]"));
+                .andExpect(content().string(
+                        "[{\"id\":1,\"name\":\"Employee\",\"salary\":24,\"managerId\":null,\"username\":\"employee\",\"role\":\"EMPLOYEE\"}]"
+                ));
     }
 
     @Test
